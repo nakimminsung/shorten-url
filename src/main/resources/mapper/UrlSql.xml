@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.UrlMapper"> <!--반드시 data내에 Mapper Interface 이름과 맞출것-->
+
+    <select id="getUrls" resultType="java.util.HashMap">
+        SELECT id,longurl FROM urlshorten;
+    </select>
+
+    <update id="updateLongUrl" useGeneratedKeys="true" keyProperty="id" parameterType="String">
+        INSERT INTO urlshorten (longurl) VALUE (#{longurl});
+    </update>
+
+    <select id="getUrlIdByLongUrl" resultType="Integer">
+        SELECT id FROM urlshorten WHERE longurl = #{longurl};
+    </select>
+
+    <select id="getLongUrlById" resultType="String" parameterType="int">
+        SELECT longurl FROM urlshorten WHERE id = #{id};
+    </select>
+</mapper>
